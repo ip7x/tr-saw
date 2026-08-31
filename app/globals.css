@@ -1,0 +1,132 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@theme inline {
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-navy: var(--navy);
+  --color-navy-foreground: var(--navy-foreground);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+
+  --background: #ffffff;
+  --foreground: #1f2937;
+  --card: #ffffff;
+  --card-foreground: #1f2937;
+  --muted: #f1f3f5;
+  --muted-foreground: #6b7280;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+
+  --primary: #1d4ed8;
+  --primary-foreground: #ffffff;
+  --primary-dark: #1e3a8a;
+  --secondary: #f1f3f5;
+  --secondary-foreground: #1f2937;
+  --accent: #eef2ff;
+  --accent-foreground: #1d4ed8;
+  --ring: #1d4ed8;
+
+  --navy: #212936;
+  --navy-foreground: #ffffff;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at top, rgba(37, 99, 235, 0.06), transparent 32%),
+      linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  }
+
+  ::selection {
+    background: rgba(37, 99, 235, 0.18);
+    color: #0f172a;
+  }
+}
+
+@utility brand-gradient {
+  background-image: linear-gradient(115deg, #1e3a8a 0%, #1d4ed8 55%, #3b82f6 100%);
+}
+
+@layer utilities {
+  .section-shell {
+    @apply rounded-2xl border border-border/80 bg-card/80 shadow-[0_18px_60px_rgba(15,23,42,0.08)] backdrop-blur-sm;
+  }
+
+  .glass-card {
+    @apply border border-white/40 bg-white/60 backdrop-blur-md;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+    transition:
+      opacity 0.7s ease-out,
+      transform 0.7s ease-out;
+    will-change: opacity, transform;
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .float-slow {
+    animation: float-slow 7s ease-in-out infinite;
+  }
+
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+
+    .float-slow {
+      animation: none;
+    }
+  }
+}
